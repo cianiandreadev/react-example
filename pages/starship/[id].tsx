@@ -8,10 +8,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { PilotList } from "../../components/pilot-list";
+import { SpaceshipAPI } from "../../types/api";
 
 export default function SpaceshipPage() {
   const { query } = useRouter();
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading } = useSWR<SpaceshipAPI>(
     `https://swapi.dev/api/starships/${query.id}`,
     fetcher
   );
@@ -32,9 +33,9 @@ export default function SpaceshipPage() {
                   color="text.secondary"
                   gutterBottom
                 >
-                  {data.name}
+                  {data!.name}
                 </Typography>
-                <PilotList pilotURLs={data.pilots} />
+                <PilotList pilotURLs={data!.pilots} />
               </CardContent>
             </Card>
           </Grid>

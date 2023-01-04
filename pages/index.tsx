@@ -7,12 +7,12 @@ import Grid from "@mui/material/Unstable_Grid2";
 import NextLink from "next/link";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { PeopleAPI } from "../types/api";
+import { PeopleListAPI } from "../types/api";
 
 import ListItemText from "@mui/material/ListItemText";
 
 export default function Home() {
-  const { data, error, isLoading } = useSWR<PeopleAPI>(
+  const { data, error, isLoading } = useSWR<PeopleListAPI>(
     "https://swapi.dev/api/people",
     fetcher
   );

@@ -1,6 +1,3 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Button from "@mui/material/Button";
 import useSWR from "swr";
 import { fetcher } from "../../lib/fetcher";
 import { StarshipList } from "../../components/starship-list";
@@ -11,10 +8,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useRouter } from "next/router";
+import { PeopleAPI } from "../../types/api";
 
 export default function PeoplePage() {
   const { query } = useRouter();
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading } = useSWR<PeopleAPI>(
     `https://swapi.dev/api/people/${query.id}`,
     fetcher
   );
@@ -35,9 +33,9 @@ export default function PeoplePage() {
                   color="text.secondary"
                   gutterBottom
                 >
-                  {data.name}
+                  {data!.name}
                 </Typography>
-                <StarshipList starshipURLs={data.starships} />
+                <StarshipList starshipURLs={data!.starships} />
               </CardContent>
             </Card>
           </Grid>
