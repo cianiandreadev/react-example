@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import Button from "@mui/material/Button";
 import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
+import { StarshipList } from "../components/startship-list";
 
 export default function Home() {
   const { data, error, isLoading } = useSWR(
@@ -12,8 +13,13 @@ export default function Home() {
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
-  console.log(data);
-  return <div>hello {data.name}!</div>;
+
+  return (
+    <div>
+      hello {data.name}!
+      <StarshipList starshipURLs={data.starships} />
+    </div>
+  );
 
   return (
     <div className={styles.container}>
