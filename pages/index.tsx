@@ -2,8 +2,8 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Button from '@mui/material/Button'
 import useSWR from 'swr'
+import {fetcher} from "../lib/fetcher"
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
 export default function Home() {
 
     const { data, error, isLoading } = useSWR('https://swapi.dev/api/people/1', fetcher)
