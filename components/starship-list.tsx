@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Starship } from "./startship";
+import { Starship } from "./starship";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 
