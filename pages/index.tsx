@@ -4,6 +4,12 @@ import Button from "@mui/material/Button";
 import useSWR from "swr";
 import { fetcher } from "../lib/fetcher";
 import { StarshipList } from "../components/startship-list";
+import CircularProgress from "@mui/material/CircularProgress";
+import Card from "@mui/material/Card";
+import Container from "@mui/material/Container";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Unstable_Grid2";
 
 export default function Home() {
   const { data, error, isLoading } = useSWR(
@@ -12,13 +18,30 @@ export default function Home() {
   );
 
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
 
   return (
-    <div>
-      hello {data.name}!
-      <StarshipList starshipURLs={data.starships} />
-    </div>
+    <Container>
+      <Grid mt={6} container justifyContent={"center"} spacing={2}>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Grid xs={6} md={8}>
+            <Card>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  {data.name}
+                </Typography>
+                <StarshipList starshipURLs={data.starships} />
+              </CardContent>
+            </Card>
+          </Grid>
+        )}
+      </Grid>
+    </Container>
   );
 
   return (
